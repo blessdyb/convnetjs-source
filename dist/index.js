@@ -4,5 +4,6 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./utils"));
+__export(require("./convnet_vol"));
 exports.REVISION = 'ALPHA';
 //# sourceMappingURL=index.js.map

@@ -4,13 +4,16 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build:docs": "./node_modules/.bin/esdoc"
+    "build:docs": "./node_modules/.bin/esdoc",
+    "build:compile_ts": "./node_modules/.bin/tsc",
+    "build": "npm run build:docs && npm run build:compile_ts"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "esdoc": "^1.1.0",
     "esdoc-standard-plugin": "^1.0.0",
-    "esdoc-typescript-plugin": "^1.0.1"
+    "esdoc-typescript-plugin": "^1.0.1",
+    "typescript": "^3.2.2"
   }
 }

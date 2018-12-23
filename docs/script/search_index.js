@@ -6,6 +6,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "convnet-sourcecode/src/convnet_vol.ts~vol",
+    "class/src/convnet_vol.ts~Vol.html",
+    "<span>Vol</span> <span class=\"search-result-import-path\">convnet-sourcecode/src/convnet_vol.ts</span>",
+    "class"
+  ],
+  [
     "convnet-sourcecode/src/utils.ts~arrcontains",
     "function/index.html#static-function-arrContains",
     "<span>arrContains</span> <span class=\"search-result-import-path\">convnet-sourcecode/src/utils.ts</span>",
@@ -360,10 +366,136 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
-    "src/convnet_vol.js",
-    "file/src/convnet_vol.js.html",
-    "src/convnet_vol.js",
+    "src/convnet_vol.ts",
+    "file/src/convnet_vol.ts.html",
+    "src/convnet_vol.ts",
     "file"
+  ],
+  [
+    "src/convnet_vol.ts~vol#add",
+    "class/src/convnet_vol.ts~Vol.html#instance-method-add",
+    "src/convnet_vol.ts~Vol#add",
+    "method"
+  ],
+  [
+    "src/convnet_vol.ts~vol#addfrom",
+    "class/src/convnet_vol.ts~Vol.html#instance-method-addFrom",
+    "src/convnet_vol.ts~Vol#addFrom",
+    "method"
+  ],
+  [
+    "src/convnet_vol.ts~vol#addfromscaled",
+    "class/src/convnet_vol.ts~Vol.html#instance-method-addFromScaled",
+    "src/convnet_vol.ts~Vol#addFromScaled",
+    "method"
+  ],
+  [
+    "src/convnet_vol.ts~vol#add_grad",
+    "class/src/convnet_vol.ts~Vol.html#instance-method-add_grad",
+    "src/convnet_vol.ts~Vol#add_grad",
+    "method"
+  ],
+  [
+    "src/convnet_vol.ts~vol#clone",
+    "class/src/convnet_vol.ts~Vol.html#instance-method-clone",
+    "src/convnet_vol.ts~Vol#clone",
+    "method"
+  ],
+  [
+    "src/convnet_vol.ts~vol#cloneandzero",
+    "class/src/convnet_vol.ts~Vol.html#instance-method-cloneAndZero",
+    "src/convnet_vol.ts~Vol#cloneAndZero",
+    "method"
+  ],
+  [
+    "src/convnet_vol.ts~vol#constructor",
+    "class/src/convnet_vol.ts~Vol.html#instance-constructor-constructor",
+    "src/convnet_vol.ts~Vol#constructor",
+    "method"
+  ],
+  [
+    "src/convnet_vol.ts~vol#depth",
+    "class/src/convnet_vol.ts~Vol.html#instance-member-depth",
+    "src/convnet_vol.ts~Vol#depth",
+    "member"
+  ],
+  [
+    "src/convnet_vol.ts~vol#dw",
+    "class/src/convnet_vol.ts~Vol.html#instance-member-dw",
+    "src/convnet_vol.ts~Vol#dw",
+    "member"
+  ],
+  [
+    "src/convnet_vol.ts~vol#fromjson",
+    "class/src/convnet_vol.ts~Vol.html#instance-method-fromJSON",
+    "src/convnet_vol.ts~Vol#fromJSON",
+    "method"
+  ],
+  [
+    "src/convnet_vol.ts~vol#get",
+    "class/src/convnet_vol.ts~Vol.html#instance-method-get",
+    "src/convnet_vol.ts~Vol#get",
+    "method"
+  ],
+  [
+    "src/convnet_vol.ts~vol#getnodeindex",
+    "class/src/convnet_vol.ts~Vol.html#instance-method-getNodeIndex",
+    "src/convnet_vol.ts~Vol#getNodeIndex",
+    "method"
+  ],
+  [
+    "src/convnet_vol.ts~vol#get_grad",
+    "class/src/convnet_vol.ts~Vol.html#instance-method-get_grad",
+    "src/convnet_vol.ts~Vol#get_grad",
+    "method"
+  ],
+  [
+    "src/convnet_vol.ts~vol#init",
+    "class/src/convnet_vol.ts~Vol.html#instance-method-init",
+    "src/convnet_vol.ts~Vol#init",
+    "method"
+  ],
+  [
+    "src/convnet_vol.ts~vol#set",
+    "class/src/convnet_vol.ts~Vol.html#instance-method-set",
+    "src/convnet_vol.ts~Vol#set",
+    "method"
+  ],
+  [
+    "src/convnet_vol.ts~vol#setconst",
+    "class/src/convnet_vol.ts~Vol.html#instance-method-setConst",
+    "src/convnet_vol.ts~Vol#setConst",
+    "method"
+  ],
+  [
+    "src/convnet_vol.ts~vol#set_grad",
+    "class/src/convnet_vol.ts~Vol.html#instance-method-set_grad",
+    "src/convnet_vol.ts~Vol#set_grad",
+    "method"
+  ],
+  [
+    "src/convnet_vol.ts~vol#sx",
+    "class/src/convnet_vol.ts~Vol.html#instance-member-sx",
+    "src/convnet_vol.ts~Vol#sx",
+    "member"
+  ],
+  [
+    "src/convnet_vol.ts~vol#sy",
+    "class/src/convnet_vol.ts~Vol.html#instance-member-sy",
+    "src/convnet_vol.ts~Vol#sy",
+    "member"
+  ],
+  [
+    "src/convnet_vol.ts~vol#tojson",
+    "class/src/convnet_vol.ts~Vol.html#instance-method-toJSON",
+    "src/convnet_vol.ts~Vol#toJSON",
+    "method"
+  ],
+  [
+    "src/convnet_vol.ts~vol#w",
+    "class/src/convnet_vol.ts~Vol.html#instance-member-w",
+    "src/convnet_vol.ts~Vol#w",
+    "member"
   ],
   [
     "src/index.ts",

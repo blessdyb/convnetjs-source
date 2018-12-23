@@ -566,64 +566,752 @@
   {
     "__docId__": 48,
     "kind": "file",
-    "name": "src/convnet_vol.js",
-    "content": "const Vol = (width, height, depth, c) => {\n    if (Array.isArray(width)) {\n\n    } else {\n\n    }\n};\n\nVol.prototype = {\n    get: (width, height, depth) => {\n        \n    }\n}\n\nmodule.exports = {\n    Vol\n};",
+    "name": "src/convnet_vol.ts",
+    "content": "import * as utils from './utils';\n\ninterface VolModel {\n    sx: Array<number>|number;\n    sy: Array<number>|number;\n    depth: number;\n    w: Float64Array;\n}\n\n/**\n * Store a 3D volumn of numbers with width(sx), height(sy), depth(depth) for the network.\n * It also holds weights and gradients w.r.t the weights.\n */\nexport class Vol {\n    sx: number;\n    sy: number;\n    depth: number;\n    w: Float64Array;\n    dw: Float64Array;\n    constructor(sx: any, sy: any, depth: number, c?: number) {\n        this.init(sx, sy, depth, c);\n    }\n    /**\n     * Initialize the network input placeholders and parameters\n     * - If the given `width` is an array, we assume that 1D volumn is provided\n     * - If the given `width`/`height`/`depth` are all `number`, it will be treated as a 3D vlumn\n     */\n    init(sx: any, sy: any, depth: number, c?: number) {\n        if (Array.isArray(sx)) {\n            this.sx = 1;\n            this.sx = 1;\n            this.depth = sx.length;\n            this.w = utils.zeros(this.depth);\n            this.dw = utils.zeros(this.depth);\n            sx.forEach((item, index) => this.w[index] = item);\n        } else {\n            this.sx = sx;\n            this.sy = sy;\n            this.depth = depth;\n            let n = sx * sy * depth;\n            this.w = utils.zeros(n);\n            this.dw = utils.zeros(n);\n            this.w.fill(c || Math.sqrt(1.0 / n));\n        }\n    }\n    /**\n     * Address the node by given `width`(x), `height`(y) and `depth`(d), then return the index of this node in the flatten 1D list.\n     */\n    getNodeIndex(x: number, y: number, d: number): number {\n        return ((this.sx * y) + x) * this.depth + d;\n    }\n    /**\n     * Address the node and return its weight.\n     */\n    get(x: number, y: number, d: number): number {\n        let idx = this.getNodeIndex(x, y, d);\n        return this.w[idx];\n    }\n    /**\n     * Address the node and reset its weight to the given `value`(v).\n     */\n    set(x: number, y: number, d: number, v: number): void {\n        let idx = this.getNodeIndex(x, y, d);\n        this.w[idx] = v;\n    }\n    /**\n     * Address the node and add the given `value`(v) to its weight.\n     */\n    add(x: number, y: number, d: number, v: number): void {\n        let idx = this.getNodeIndex(x, y, d);\n        this.w[idx] += v;\n    }\n    /**\n     * Address the node and return its gradient.\n     */\n    get_grad(x: number, y: number, d: number): number {\n        let idx = this.getNodeIndex(x, y, d);\n        return this.dw[idx];\n    }\n    /**\n     * Address the node and reset its gradient to the given `value`(v).\n     */\n    set_grad(x: number, y: number, d: number, v: number): void {\n        let idx = this.getNodeIndex(x, y, d);\n        this.dw[idx] = v;\n    }\n    /**\n     * Address the node and add the given `value`(v) to its gradient.\n     */\n    add_grad(x: number, y: number, d: number, v: number): void {\n        let idx = this.getNodeIndex(x, y, d);\n        this.dw[idx] += v;\n    }\n    /**\n     * Return a clone of current network and initialize the weights and gradients as 0\n     */\n    cloneAndZero(): Vol {\n        return new Vol(this.sx, this.sy, this.depth, 0.0);\n    }\n    /**\n     * Return a clone of current network with the same parameters, only reset gradients to 0\n     */\n    clone(): Vol {\n        let volumn = new Vol(this.sx, this.sy, this.depth, 0.0);\n        this.w.forEach((item, index) => {\n            volumn.w[index] = item;\n        });\n        return volumn;\n    }\n    /**\n     * Add the weights of a given network `volumn` to current network\n     */\n    addFrom(volumn: Vol): void {\n        this.w.forEach((item, index) => {\n            this.w[index] += volumn.w[index];\n        });\n    }\n    /**\n     * Add the weights of a given network `volumn` with scale `alpha` to current network\n     */\n    addFromScaled(volumn: Vol, alpha: number): void {\n        this.w.forEach((item, index) => {\n            this.w[index] += alpha * volumn.w[index];\n        });\n    }\n    /**\n     * Reset the weights of current network to a given constant number `value`\n     */\n    setConst(value: number): void {\n        this.w.forEach((item, index) => {\n            this.w[index] = value;\n        });\n    }\n    /**\n     * Reset the netwrok information parameters informations\n     */\n    fromJSON(obj: VolModel) {\n        this.init(obj.sx, obj.sy, obj.depth);\n    }\n    /**\n     * Expose the netwrok parameters information\n     */\n    toJSON(): VolModel {\n        return {\n            sx: this.sx,\n            sy: this.sy,\n            depth: this.depth,\n            w: this.w\n        };\n    }\n}",
     "static": true,
-    "longname": "/Users/dyabo/Desktop/convnet-sourcecode/src/convnet_vol.js",
+    "longname": "/Users/dyabo/Desktop/convnet-sourcecode/src/convnet_vol.ts",
     "access": "public",
     "description": null,
     "lineNumber": 1
   },
   {
     "__docId__": 49,
-    "kind": "function",
+    "kind": "class",
     "name": "Vol",
-    "memberof": "src/convnet_vol.js",
-    "generator": false,
-    "async": false,
+    "memberof": "src/convnet_vol.ts",
     "static": true,
-    "longname": "src/convnet_vol.js~Vol",
+    "longname": "src/convnet_vol.ts~Vol",
     "access": "public",
-    "export": false,
-    "importPath": "convnet-sourcecode/src/convnet_vol.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 1,
-    "undocument": true,
-    "params": [
-      {
-        "name": "width",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "height",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "depth",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "c",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null,
-    "ignore": true
+    "export": true,
+    "importPath": "convnet-sourcecode/src/convnet_vol.ts",
+    "importStyle": "{Vol}",
+    "description": "Store a 3D volumn of numbers with width(sx), height(sy), depth(depth) for the network.\nIt also holds weights and gradients w.r.t the weights.",
+    "lineNumber": 14,
+    "interface": false
   },
   {
     "__docId__": 50,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "method",
+    "name": "init",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#init",
+    "access": "public",
+    "description": "Initialize the network input placeholders and parameters\n- If the given `width` is an array, we assume that 1D volumn is provided\n- If the given `width`/`height`/`depth` are all `number`, it will be treated as a 3D vlumn",
+    "lineNumber": 28,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "undefined"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "sx",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "undefined"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "sy",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "depth",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "c",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 52,
+    "kind": "member",
+    "name": "sx",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#sx",
+    "access": "public",
+    "description": null,
+    "lineNumber": 31,
+    "undocument": true,
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 54,
+    "kind": "member",
+    "name": "depth",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#depth",
+    "access": "public",
+    "description": null,
+    "lineNumber": 33,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 55,
+    "kind": "member",
+    "name": "w",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#w",
+    "access": "public",
+    "description": null,
+    "lineNumber": 34,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 56,
+    "kind": "member",
+    "name": "dw",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#dw",
+    "access": "public",
+    "description": null,
+    "lineNumber": 35,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 58,
+    "kind": "member",
+    "name": "sy",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#sy",
+    "access": "public",
+    "description": null,
+    "lineNumber": 40,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 62,
+    "kind": "method",
+    "name": "getNodeIndex",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#getNodeIndex",
+    "access": "public",
+    "description": "Address the node by given `width`(x), `height`(y) and `depth`(d), then return the index of this node in the flatten 1D list.",
+    "lineNumber": 49,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "x",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "y",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "d",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 63,
+    "kind": "method",
+    "name": "get",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#get",
+    "access": "public",
+    "description": "Address the node and return its weight.",
+    "lineNumber": 55,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "x",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "y",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "d",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 64,
+    "kind": "method",
+    "name": "set",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#set",
+    "access": "public",
+    "description": "Address the node and reset its weight to the given `value`(v).",
+    "lineNumber": 62,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "x",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "y",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "d",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "v",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 65,
+    "kind": "method",
+    "name": "add",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#add",
+    "access": "public",
+    "description": "Address the node and add the given `value`(v) to its weight.",
+    "lineNumber": 69,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "x",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "y",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "d",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "v",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 66,
+    "kind": "method",
+    "name": "get_grad",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#get_grad",
+    "access": "public",
+    "description": "Address the node and return its gradient.",
+    "lineNumber": 76,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "x",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "y",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "d",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 67,
+    "kind": "method",
+    "name": "set_grad",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#set_grad",
+    "access": "public",
+    "description": "Address the node and reset its gradient to the given `value`(v).",
+    "lineNumber": 83,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "x",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "y",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "d",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "v",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 68,
+    "kind": "method",
+    "name": "add_grad",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#add_grad",
+    "access": "public",
+    "description": "Address the node and add the given `value`(v) to its gradient.",
+    "lineNumber": 90,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "x",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "y",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "d",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "v",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 69,
+    "kind": "method",
+    "name": "cloneAndZero",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#cloneAndZero",
+    "access": "public",
+    "description": "Return a clone of current network and initialize the weights and gradients as 0",
+    "lineNumber": 97,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Vol"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 70,
+    "kind": "method",
+    "name": "clone",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#clone",
+    "access": "public",
+    "description": "Return a clone of current network with the same parameters, only reset gradients to 0",
+    "lineNumber": 103,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Vol"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 71,
+    "kind": "method",
+    "name": "addFrom",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#addFrom",
+    "access": "public",
+    "description": "Add the weights of a given network `volumn` to current network",
+    "lineNumber": 113,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Vol"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "volumn",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 72,
+    "kind": "method",
+    "name": "addFromScaled",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#addFromScaled",
+    "access": "public",
+    "description": "Add the weights of a given network `volumn` with scale `alpha` to current network",
+    "lineNumber": 121,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Vol"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "volumn",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "alpha",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 73,
+    "kind": "method",
+    "name": "setConst",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#setConst",
+    "access": "public",
+    "description": "Reset the weights of current network to a given constant number `value`",
+    "lineNumber": 129,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "value",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 74,
+    "kind": "method",
+    "name": "fromJSON",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#fromJSON",
+    "access": "public",
+    "description": "Reset the netwrok information parameters informations",
+    "lineNumber": 137,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "VolModel"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "obj",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 75,
+    "kind": "method",
+    "name": "toJSON",
+    "memberof": "src/convnet_vol.ts~Vol",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/convnet_vol.ts~Vol#toJSON",
+    "access": "public",
+    "description": "Expose the netwrok parameters information",
+    "lineNumber": 143,
+    "return": {
+      "nullable": null,
+      "types": [
+        "VolModel"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 76,
     "kind": "file",
     "name": "src/index.ts",
-    "content": "export * from './utils';\n\nexport const REVISION = 'ALPHA';",
+    "content": "export * from './utils';\nexport * from './convnet_vol';\n\nexport const REVISION = 'ALPHA';",
     "static": true,
     "longname": "/Users/dyabo/Desktop/convnet-sourcecode/src/index.ts",
     "access": "public",
@@ -631,7 +1319,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 51,
+    "__docId__": 77,
     "kind": "variable",
     "name": "REVISION",
     "memberof": "src/index.ts",
@@ -642,7 +1330,7 @@
     "importPath": "convnet-sourcecode/src/index.ts",
     "importStyle": "{REVISION}",
     "description": null,
-    "lineNumber": 2,
+    "lineNumber": 3,
     "undocument": true,
     "type": {
       "types": [
@@ -651,7 +1339,7 @@
     }
   },
   {
-    "__docId__": 52,
+    "__docId__": 78,
     "kind": "file",
     "name": "src/utils.ts",
     "content": "/**\n * Check if an `element` exists in given `array` or not\n */\nexport function arrContains(array: Array<any>, element: number|string): boolean {\n    return array.indexOf(element) > -1;\n}\n\n/**\n * Creates a duplicate-free version of an array\n */\nexport function arrUnique(array: Array<any>): Array<any> {\n    return array.filter((element, index, array) => array.indexOf(element) === index);\n}\n\n/**\n * Check the given `condition`, if `false`, throw exception with the given `message`\n */\nexport function assert(condition: boolean, message: any = 'Assertion failed!'): object|void {\n    if (!condition) {\n        throw new Error(message);\n    }\n}\n\n/**\n * Return the given `dict` value by `key`. \n * - If `key` is a `string`, return the value of `dict[key]` if exists, otherwise return the `defaultValue`\n * - If `key` is an `array`, use the last item of this array as `key` to query the value in `dict`\n * @param {stirng|Array<any>} key - used to query the `dict`\n * @param {any} defaultValue - default value\n */\nexport function getopt(dict: Array<any>, key: string|Array<any>, defaultValue:any): any {\n    if (typeof(key) === 'string') {\n        return dict[key] || defaultValue;\n    } else if (Array.isArray(key)){\n        let returnValue: any = defaultValue;\n        for (let i = 0, len = key.length; i < len; i++) {\n            let dictElementValue = dict[key[i]];\n            if (typeof(dictElementValue) != 'undefined') {\n                returnValue = dictElementValue;\n            }\n        }\n        return returnValue;\n    }\n}\n\n/**\n * Return a random float number between `a` and `b`\n */\nexport function randf(a: number, b: number): number {\n    return Math.random() * (b - a) + a;\n}\n\n/**\n * Return a random integer number between `a` and `b`\n */\nexport function randi(a: number, b: number): number {\n    return Math.floor(randf(a, b))\n}\n\nlet gaussRandomReturnValue: boolean = false;\nlet gaussRandomValue: number = 0.0;\n/**\n * Return a number by following Gaussian distribution by using Box-Muller Transform\n * - https://en.wikipedia.org/wiki/Box-Muller_transform\n * - https://stackoverflow.com/questions/25582882/javascript-math-random-normal-distribution-gaussian-bell-curve\n */\nexport function gaussRandom(): number {\n    if (gaussRandomReturnValue) {\n        gaussRandomReturnValue = false;\n        return gaussRandomValue;\n    }\n    let u = 2 * Math.random() - 1;\n    let v = 2 * Math.random() - 1;\n    let r = u * u + v * v;\n    if (r === 0 || r === 1) {\n        return gaussRandom();\n    }\n    let c = Math.sqrt(-2*Math.log(r) / r);\n    gaussRandomValue = v * c;\n    gaussRandomReturnValue = true;\n    return u * c;\n};\n\n/**\n * Return a random number based on the given `mean` and `standard deviation` by following Gaussian distribution \n */\nexport function randn(mean: number, std: number): number {\n    return mean + gaussRandom() * std;\n}\n\n/**\n * Return a series of 0\n */\nexport function zeros(n: number): Float64Array {\n    return new Float64Array(n);\n}\n\n/**\n * Return the max/min information of a given value list.\n */\nexport function maxmin(values: number[]): object {\n    if (values.length === 0) return {};\n    let maxValue = Math.max(...values);\n    let minValue = Math.min(...values);\n    return {\n        maxi: values.indexOf(maxValue),\n        maxv: maxValue,\n        mini: values.indexOf(minValue),\n        minv: minValue,\n        dv: maxValue - minValue\n    };\n};\n\n/**\n * Generate a incrementing number list between 0 and `n`, shffle the list and return it as the result\n * - https://www.frankmitchell.org/2015/01/fisher-yates/\n */\nexport function randperm(n: number): Array<number> {\n    let array = Array.from(Array(10).keys());\n    let i = 0;\n    let j = 0;\n    let temp = null;\n    for (i = array.length - 1; i > 0; i -= 1) {\n        j = Math.floor(Math.random() * (i + 1));\n        temp = array[i];\n        array[i] = array[j];\n        array[j] = temp;\n    }\n    return array;\n}\n\n/**\n * Return a sample of the given `array` by given `probabilities`\n */\nexport function weightedSample(array: Array<any>, probabilities: Array<number>): Array<any>|void {\n    let probability = randf(0, 1.0);\n    let cumulateProbability = 0.0;\n    for (let k = 0, n = array.length; k < n; k++) {\n        cumulateProbability += probabilities[k];\n        if (probability < cumulateProbability) {\n            return array[k];\n        }\n    }\n}\n",
@@ -662,7 +1350,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 53,
+    "__docId__": 79,
     "kind": "function",
     "name": "arrContains",
     "memberof": "src/utils.ts",
@@ -708,7 +1396,7 @@
     }
   },
   {
-    "__docId__": 54,
+    "__docId__": 80,
     "kind": "function",
     "name": "arrUnique",
     "memberof": "src/utils.ts",
@@ -744,7 +1432,7 @@
     }
   },
   {
-    "__docId__": 55,
+    "__docId__": 81,
     "kind": "function",
     "name": "assert",
     "memberof": "src/utils.ts",
@@ -783,7 +1471,7 @@
     "return": null
   },
   {
-    "__docId__": 56,
+    "__docId__": 82,
     "kind": "function",
     "name": "getopt",
     "memberof": "src/utils.ts",
@@ -836,7 +1524,7 @@
     }
   },
   {
-    "__docId__": 57,
+    "__docId__": 83,
     "kind": "function",
     "name": "randf",
     "memberof": "src/utils.ts",
@@ -882,7 +1570,7 @@
     }
   },
   {
-    "__docId__": 58,
+    "__docId__": 84,
     "kind": "function",
     "name": "randi",
     "memberof": "src/utils.ts",
@@ -928,7 +1616,7 @@
     }
   },
   {
-    "__docId__": 59,
+    "__docId__": 85,
     "kind": "variable",
     "name": "gaussRandomReturnValue",
     "memberof": "src/utils.ts",
@@ -949,7 +1637,7 @@
     "ignore": true
   },
   {
-    "__docId__": 60,
+    "__docId__": 86,
     "kind": "variable",
     "name": "gaussRandomValue",
     "memberof": "src/utils.ts",
@@ -970,7 +1658,7 @@
     "ignore": true
   },
   {
-    "__docId__": 61,
+    "__docId__": 87,
     "kind": "function",
     "name": "gaussRandom",
     "memberof": "src/utils.ts",
@@ -995,7 +1683,7 @@
     "params": []
   },
   {
-    "__docId__": 62,
+    "__docId__": 88,
     "kind": "function",
     "name": "randn",
     "memberof": "src/utils.ts",
@@ -1041,7 +1729,7 @@
     }
   },
   {
-    "__docId__": 63,
+    "__docId__": 89,
     "kind": "function",
     "name": "zeros",
     "memberof": "src/utils.ts",
@@ -1077,7 +1765,7 @@
     }
   },
   {
-    "__docId__": 64,
+    "__docId__": 90,
     "kind": "function",
     "name": "maxmin",
     "memberof": "src/utils.ts",
@@ -1110,7 +1798,7 @@
     }
   },
   {
-    "__docId__": 65,
+    "__docId__": 91,
     "kind": "function",
     "name": "randperm",
     "memberof": "src/utils.ts",
@@ -1146,7 +1834,7 @@
     }
   },
   {
-    "__docId__": 66,
+    "__docId__": 92,
     "kind": "function",
     "name": "weightedSample",
     "memberof": "src/utils.ts",
@@ -1198,7 +1886,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"convnet-sourcecode\",\n  \"version\": \"0.0.1\",\n  \"description\": \"\",\n  \"main\": \"dist/index.js\",\n  \"scripts\": {\n    \"build:docs\": \"./node_modules/.bin/esdoc\"\n  },\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"esdoc-typescript-plugin\": \"^1.0.1\"\n  }\n}\n",
+    "content": "{\n  \"name\": \"convnet-sourcecode\",\n  \"version\": \"0.0.1\",\n  \"description\": \"\",\n  \"main\": \"dist/index.js\",\n  \"scripts\": {\n    \"build:docs\": \"./node_modules/.bin/esdoc\",\n    \"build:compile_ts\": \"./node_modules/.bin/tsc\",\n    \"build\": \"npm run build:docs && npm run build:compile_ts\"\n  },\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"esdoc-typescript-plugin\": \"^1.0.1\",\n    \"typescript\": \"^3.2.2\"\n  }\n}\n",
     "longname": "/Users/dyabo/Desktop/convnet-sourcecode/package.json",
     "name": "package.json",
     "static": true,

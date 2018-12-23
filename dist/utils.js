@@ -57,6 +57,7 @@ function gaussRandom() {
     gaussRandomReturnValue = true;
     return u * c;
 }
+exports.gaussRandom = gaussRandom;
 ;
 function randn(mean, std) {
     return mean + gaussRandom() * std;
