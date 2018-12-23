@@ -1,0 +1,29 @@
+{
+  "coverage": "75%",
+  "expectCount": 16,
+  "actualCount": 12,
+  "files": {
+    "src/convnet_vol.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        1
+      ]
+    },
+    "src/index.ts": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "src/utils.ts": {
+      "expectCount": 14,
+      "actualCount": 12,
+      "undocumentLines": [
+        103,
+        104
+      ]
+    }
+  }
+}

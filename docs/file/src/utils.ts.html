@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/utils.ts | convnet-sourcecode</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-arrContains">arrContains</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-arrUnique">arrUnique</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-assert">assert</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gaussRandom">gaussRandom</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getopt">getopt</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-maxmin">maxmin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randf">randf</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randi">randi</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randn">randn</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randperm">randperm</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-weightedSample">weightedSample</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-zeros">zeros</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REVISION">REVISION</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/utils.ts</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Check if an `element` exists in given `array` or not
+ */
+export function arrContains(array: Array&lt;any&gt;, element: number|string): boolean {
+    return array.indexOf(element) &gt; -1;
+}
+
+/**
+ * Creates a duplicate-free version of an array
+ */
+export function arrUnique(array: Array&lt;any&gt;): Array&lt;any&gt; {
+    return array.filter((element, index, array) =&gt; array.indexOf(element) === index);
+}
+
+/**
+ * Check the given `condition`, if `false`, throw exception with the given `message`
+ */
+export function assert(condition: boolean, message: any = &apos;Assertion failed!&apos;): object|void {
+    if (!condition) {
+        throw new Error(message);
+    }
+}
+
+/**
+ * Return the given `dict` value by `key`. 
+ * - If `key` is a `string`, return the value of `dict[key]` if exists, otherwise return the `defaultValue`
+ * - If `key` is an `array`, use the last item of this array as `key` to query the value in `dict`
+ * @param {stirng|Array&lt;any&gt;} key - used to query the `dict`
+ * @param {any} defaultValue - default value
+ */
+export function getopt(dict: Array&lt;any&gt;, key: string|Array&lt;any&gt;, defaultValue:any): any {
+    if (typeof(key) === &apos;string&apos;) {
+        return dict[key] || defaultValue;
+    } else if (Array.isArray(key)){
+        let returnValue: any = defaultValue;
+        for (let i = 0, len = key.length; i &lt; len; i++) {
+            let dictElementValue = dict[key[i]];
+            if (typeof(dictElementValue) != &apos;undefined&apos;) {
+                returnValue = dictElementValue;
+            }
+        }
+        return returnValue;
+    }
+}
+
+/**
+ * Return a random float number between `a` and `b`
+ */
+export function randf(a: number, b: number): number {
+    return Math.random() * (b - a) + a;
+}
+
+/**
+ * Return a random integer number between `a` and `b`
+ */
+export function randi(a: number, b: number): number {
+    return Math.floor(randf(a, b))
+}
+
+let gaussRandomReturnValue: boolean = false;
+let gaussRandomValue: number = 0.0;
+/**
+ * Return a number by following Gaussian distribution by using Box-Muller Transform
+ * - https://en.wikipedia.org/wiki/Box-Muller_transform
+ * - https://stackoverflow.com/questions/25582882/javascript-math-random-normal-distribution-gaussian-bell-curve
+ */
+export function gaussRandom(): number {
+    if (gaussRandomReturnValue) {
+        gaussRandomReturnValue = false;
+        return gaussRandomValue;
+    }
+    let u = 2 * Math.random() - 1;
+    let v = 2 * Math.random() - 1;
+    let r = u * u + v * v;
+    if (r === 0 || r === 1) {
+        return gaussRandom();
+    }
+    let c = Math.sqrt(-2*Math.log(r) / r);
+    gaussRandomValue = v * c;
+    gaussRandomReturnValue = true;
+    return u * c;
+};
+
+/**
+ * Return a random number based on the given `mean` and `standard deviation` by following Gaussian distribution 
+ */
+export function randn(mean: number, std: number): number {
+    return mean + gaussRandom() * std;
+}
+
+/**
+ * Return a series of 0
+ */
+export function zeros(n: number): Float64Array {
+    return new Float64Array(n);
+}
+
+/**
+ * Return the max/min information of a given value list.
+ */
+export function maxmin(values: number[]): object {
+    if (values.length === 0) return {};
+    let maxValue = Math.max(...values);
+    let minValue = Math.min(...values);
+    return {
+        maxi: values.indexOf(maxValue),
+        maxv: maxValue,
+        mini: values.indexOf(minValue),
+        minv: minValue,
+        dv: maxValue - minValue
+    };
+};
+
+/**
+ * Generate a incrementing number list between 0 and `n`, shffle the list and return it as the result
+ * - https://www.frankmitchell.org/2015/01/fisher-yates/
+ */
+export function randperm(n: number): Array&lt;number&gt; {
+    let array = Array.from(Array(10).keys());
+    let i = 0;
+    let j = 0;
+    let temp = null;
+    for (i = array.length - 1; i &gt; 0; i -= 1) {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
+
+/**
+ * Return a sample of the given `array` by given `probabilities`
+ */
+export function weightedSample(array: Array&lt;any&gt;, probabilities: Array&lt;number&gt;): Array&lt;any&gt;|void {
+    let probability = randf(0, 1.0);
+    let cumulateProbability = 0.0;
+    for (let k = 0, n = array.length; k &lt; n; k++) {
+        cumulateProbability += probabilities[k];
+        if (probability &lt; cumulateProbability) {
+            return array[k];
+        }
+    }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
