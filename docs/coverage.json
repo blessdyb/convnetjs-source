@@ -1,8 +1,23 @@
 {
-  "coverage": "76.92%",
-  "expectCount": 39,
-  "actualCount": 30,
+  "coverage": "72.3%",
+  "expectCount": 65,
+  "actualCount": 47,
   "files": {
+    "src/convnet_layers_dotproducts.ts": {
+      "expectCount": 25,
+      "actualCount": 16,
+      "undocumentLines": [
+        10,
+        60,
+        91,
+        92,
+        93,
+        94,
+        99,
+        112,
+        113
+      ]
+    },
     "src/convnet_vol.ts": {
       "expectCount": 22,
       "actualCount": 16,
@@ -24,12 +39,12 @@
       "expectCount": 1,
       "actualCount": 0,
       "undocumentLines": [
-        4
+        5
       ]
     },
     "src/utils.ts": {
-      "expectCount": 14,
-      "actualCount": 12,
+      "expectCount": 15,
+      "actualCount": 13,
       "undocumentLines": [
         103,
         104

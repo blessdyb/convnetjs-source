@@ -116,7 +116,7 @@ export function maxmin(values: number[]): object {
  * - https://www.frankmitchell.org/2015/01/fisher-yates/
  */
 export function randperm(n: number): Array<number> {
-    let array = Array.from(Array(10).keys());
+    let array = range(10);
     let i = 0;
     let j = 0;
     let temp = null;
@@ -141,4 +141,11 @@ export function weightedSample(array: Array<any>, probabilities: Array<number>):
             return array[k];
         }
     }
+}
+
+/**
+ * Return a zero based number list by given size `n`
+ */
+export function range(n:number = 0): number[] {
+    return Array.from(Array(n).keys());
 }

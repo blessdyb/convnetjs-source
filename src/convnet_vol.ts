@@ -1,6 +1,6 @@
 import * as utils from './utils';
 
-interface VolModel {
+interface VolInterface {
     sx: Array<number>|number;
     sy: Array<number>|number;
     depth: number;
@@ -134,13 +134,13 @@ export class Vol {
     /**
      * Reset the netwrok information parameters informations
      */
-    fromJSON(obj: VolModel) {
+    fromJSON(obj: VolInterface) {
         this.init(obj.sx, obj.sy, obj.depth);
     }
     /**
      * Expose the netwrok parameters information
      */
-    toJSON(): VolModel {
+    toJSON(): VolInterface {
         return {
             sx: this.sx,
             sy: this.sy,

@@ -1,5 +1,17 @@
 window.esdocSearchIndex = [
   [
+    "convnet-sourcecode/src/convnet_layers_dotproducts.ts~convlayer",
+    "class/src/convnet_layers_dotproducts.ts~ConvLayer.html",
+    "<span>ConvLayer</span> <span class=\"search-result-import-path\">convnet-sourcecode/src/convnet_layers_dotproducts.ts</span>",
+    "class"
+  ],
+  [
+    "convnet-sourcecode/src/convnet_layers_dotproducts.ts~fullyconnlayer",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html",
+    "<span>FullyConnLayer</span> <span class=\"search-result-import-path\">convnet-sourcecode/src/convnet_layers_dotproducts.ts</span>",
+    "class"
+  ],
+  [
     "convnet-sourcecode/src/index.ts~revision",
     "variable/index.html#static-variable-REVISION",
     "<span>REVISION</span> <span class=\"search-result-import-path\">convnet-sourcecode/src/index.ts</span>",
@@ -81,6 +93,12 @@ window.esdocSearchIndex = [
     "convnet-sourcecode/src/utils.ts~randperm",
     "function/index.html#static-function-randperm",
     "<span>randperm</span> <span class=\"search-result-import-path\">convnet-sourcecode/src/utils.ts</span>",
+    "function"
+  ],
+  [
+    "convnet-sourcecode/src/utils.ts~range",
+    "function/index.html#static-function-range",
+    "<span>range</span> <span class=\"search-result-import-path\">convnet-sourcecode/src/utils.ts</span>",
     "function"
   ],
   [
@@ -376,6 +394,150 @@ window.esdocSearchIndex = [
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
     "src/.external-ecmascript.js~undefined",
     "external"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts",
+    "file/src/convnet_layers_dotproducts.ts.html",
+    "src/convnet_layers_dotproducts.ts",
+    "file"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~convlayer#backward",
+    "class/src/convnet_layers_dotproducts.ts~ConvLayer.html#instance-method-backward",
+    "src/convnet_layers_dotproducts.ts~ConvLayer#backward",
+    "method"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~convlayer#constructor",
+    "class/src/convnet_layers_dotproducts.ts~ConvLayer.html#instance-constructor-constructor",
+    "src/convnet_layers_dotproducts.ts~ConvLayer#constructor",
+    "method"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~convlayer#forward",
+    "class/src/convnet_layers_dotproducts.ts~ConvLayer.html#instance-method-forward",
+    "src/convnet_layers_dotproducts.ts~ConvLayer#forward",
+    "method"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~convlayer#fromjson",
+    "class/src/convnet_layers_dotproducts.ts~ConvLayer.html#instance-method-fromJSON",
+    "src/convnet_layers_dotproducts.ts~ConvLayer#fromJSON",
+    "method"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~convlayer#getparamsandgrads",
+    "class/src/convnet_layers_dotproducts.ts~ConvLayer.html#instance-method-getParamsAndGrads",
+    "src/convnet_layers_dotproducts.ts~ConvLayer#getParamsAndGrads",
+    "method"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~convlayer#tojson",
+    "class/src/convnet_layers_dotproducts.ts~ConvLayer.html#instance-method-toJSON",
+    "src/convnet_layers_dotproducts.ts~ConvLayer#toJSON",
+    "method"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#backward",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-method-backward",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#backward",
+    "method"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#biases",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-member-biases",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#biases",
+    "member"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#constructor",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-constructor-constructor",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#constructor",
+    "method"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#filters",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-member-filters",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#filters",
+    "member"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#forward",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-method-forward",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#forward",
+    "method"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#fromjson",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-method-fromJSON",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#fromJSON",
+    "method"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#getparamsandgrads",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-method-getParamsAndGrads",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#getParamsAndGrads",
+    "method"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#in_act",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-member-in_act",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#in_act",
+    "member"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#l1_decay_mul",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-member-l1_decay_mul",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#l1_decay_mul",
+    "member"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#l2_decay_mul",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-member-l2_decay_mul",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#l2_decay_mul",
+    "member"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#layer_type",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-member-layer_type",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#layer_type",
+    "member"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#num_inputs",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-member-num_inputs",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#num_inputs",
+    "member"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#out_act",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-member-out_act",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#out_act",
+    "member"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#out_depth",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-member-out_depth",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#out_depth",
+    "member"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#out_sx",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-member-out_sx",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#out_sx",
+    "member"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#out_sy",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-member-out_sy",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#out_sy",
+    "member"
+  ],
+  [
+    "src/convnet_layers_dotproducts.ts~fullyconnlayer#tojson",
+    "class/src/convnet_layers_dotproducts.ts~FullyConnLayer.html#instance-method-toJSON",
+    "src/convnet_layers_dotproducts.ts~FullyConnLayer#toJSON",
+    "method"
   ],
   [
     "src/convnet_vol.ts",

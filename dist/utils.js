@@ -83,7 +83,7 @@ function maxmin(values) {
 exports.maxmin = maxmin;
 ;
 function randperm(n) {
-    var array = Array.from(Array(10).keys());
+    var array = range(10);
     var i = 0;
     var j = 0;
     var temp = null;
@@ -107,4 +107,9 @@ function weightedSample(array, probabilities) {
     }
 }
 exports.weightedSample = weightedSample;
+function range(n) {
+    if (n === void 0) { n = 0; }
+    return Array.from(Array(n).keys());
+}
+exports.range = range;
 //# sourceMappingURL=utils.js.map
