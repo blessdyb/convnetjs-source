@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl">
-  <title data-ice="title">Home | convnet-sourcecode</title>
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/convnet_vol_util.ts | convnet-sourcecode</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -49,10 +49,86 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><p>This is a project to annotate karpathy&apos;s <a href="https://github.com/karpathy/convnetjs">ConvnetJS source code</a> and also rewrite it with typescript.</p>
-<h3 id="index-js">index.js</h3><p>Entry point</p>
-<h2 id="utils-js">utils.js</h2><p>Utilities file, exports random and array operations.</p>
-</div>
+<div class="content" data-ice="content"><h1 data-ice="title">src/convnet_vol_util.ts</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import * as util from &apos;./utils&apos;;
+import { Vol } from &apos;./convnet_vol&apos;;
+
+/**
+ * Data augmentation to the given `volume` based on `crop`.
+ * - `crop` is the size of output
+ * - `dx`,`dy` are offset wrt incoming volume, of the shift
+ * - `flip` is boolean on whether we also want to flip the matrix between left and right horizontally
+ */
+export function augment(volume: Vol, crop: number, dx?: number, dy?: number, flip?: number): Vol {
+    if (isNaN(dx)) {
+        dx = util.randi(0, volume.sx - crop);
+    }
+    if (isNaN(dy)) {
+        dy = util.randi(0, volume.sy - crop);
+    }
+    let croppedVolume;
+    if (crop !== volume.sx || dx!==0 || dy!==0) {
+        croppedVolume = new Vol(crop, crop, volume.depth, 0.0);
+        for(let x = 0; x &lt; crop; x++) {
+            for(let y = 0; y &lt; crop; y++) {
+                if (x + dx &lt; 0 || x + dx &gt;= volume.sx || y + dy &lt; 0 || y + dy &gt;= volume.sy) {
+                    continue;
+                } else {
+                    for(let d = 0; d &lt; volume.depth; d++) {
+                        // Fetch the weight value by offset `dx`/`dy`, then set it to the `croppedVolume`
+                        croppedVolume.set(x, y, d, volume.get(x + dx, y + dy, d));
+                    }
+                }
+            }
+        }
+    } else {
+        croppedVolume = volume;
+    }
+
+    if(flip) {
+        // Horizontally get the flipped `croppedVolume` and set it to a cloneAndZeroed volume
+        let clonedCroppedVolume = croppedVolume.cloneAndZero();
+        for(let x = 0; x &lt; croppedVolume.sx; x++) {
+            for(let y = 0; y &lt; croppedVolume.sy; y++) {
+                for(let d = 0; d &lt; croppedVolume.depth; d++) {
+                    clonedCroppedVolume.set(x, y, d, croppedVolume.get(croppedVolume.sx - x - 1, y, d));
+                }
+            }
+        }
+        croppedVolume = clonedCroppedVolume;
+    }
+    return croppedVolume;
+}
+
+/**
+ * Load an HTML DOM image to a virtual canvas and get the pixles data. Then return a `volume` based on the image data
+ * - If `grayScale` is given, the depth of the `volume` is 1
+ * - If `grayScale` is not given, the depth of the `volume` is 4 (RGBA)
+ */
+export function img_to_vol(img: HTMLImageElement, grayScale: boolean = false): Vol {
+    let canvas = document.createElement(&apos;canvas&apos;);
+    canvas.width = img.width;
+    canvas.height = img.width;
+    let context = canvas.getContext(&apos;2d&apos;);
+    context.drawImage(img, 0, 0);
+    let imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+    // Extract the pixels data from image through a canvas
+    let {data, width, height} = imgData;
+    let volume = new Vol(width, height, 4, 0.0);
+    volume.w = Float64Array.from(data, item =&gt; item / 255.0 - 0.5);
+    // Only keep the gray channel data
+    if (grayScale) {
+        let grayScaleVolume = new Vol(width, height, 1, 0.0);
+        for (let i = 0; i &lt; width; i++) {
+            for (let j = 0; j &lt; height; j++) {
+                grayScaleVolume.set(i, j, 0, volume.get(i, j, 0));
+            }
+        }
+        volume = grayScaleVolume;
+    }
+    return volume;
+}</code></pre>
+
 </div>
 
 <footer class="footer">

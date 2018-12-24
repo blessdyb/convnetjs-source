@@ -99,7 +99,7 @@
         "trailingComments": [
           {
             "type": "CommentBlock",
-            "value": "*\n * @desc\n * Store a 3D volumn of numbers with width(sx), height(sy), depth(depth) for the network.\n * It also holds weights and gradients w.r.t the weights.\n * @lineNumber\n * 14\n ",
+            "value": "*\n * @desc\n * Store a 3D volume of numbers with width(sx), height(sy), depth(depth) for the network.\n * It also holds weights and gradients w.r.t the weights.\n * @lineNumber\n * 14\n ",
             "start": 34,
             "end": 219,
             "loc": {
@@ -457,7 +457,7 @@
                 "trailingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n     * @desc\n     * Initialize the network input placeholders and parameters\n     * - If the given `width` is an array, we assume that 1D volumn is provided\n     * - If the given `width`/`height`/`depth` are all `number`, it will be treated as a 3D vlumn\n     * @lineNumber\n     * 28\n     * @param\n     * {undefined} sx\n     * @param\n     * {undefined} sy\n     * @param\n     * {number} depth\n     * @param\n     * {number} c\n     ",
+                    "value": "*\n     * @desc\n     * Initialize the network input placeholders and parameters\n     * - If the given `width` is an array, we assume that 1D volume is provided\n     * - If the given `width`/`height`/`depth` are all `number`, it will be treated as a 3D vlumn\n     * @lineNumber\n     * 28\n     * @param\n     * {undefined} sx\n     * @param\n     * {undefined} sy\n     * @param\n     * {number} depth\n     * @param\n     * {number} c\n     ",
                     "start": 322,
                     "end": 757,
                     "loc": {
@@ -2718,7 +2718,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n     * @desc\n     * Initialize the network input placeholders and parameters\n     * - If the given `width` is an array, we assume that 1D volumn is provided\n     * - If the given `width`/`height`/`depth` are all `number`, it will be treated as a 3D vlumn\n     * @lineNumber\n     * 28\n     * @param\n     * {undefined} sx\n     * @param\n     * {undefined} sy\n     * @param\n     * {number} depth\n     * @param\n     * {number} c\n     ",
+                    "value": "*\n     * @desc\n     * Initialize the network input placeholders and parameters\n     * - If the given `width` is an array, we assume that 1D volume is provided\n     * - If the given `width`/`height`/`depth` are all `number`, it will be treated as a 3D vlumn\n     * @lineNumber\n     * 28\n     * @param\n     * {undefined} sx\n     * @param\n     * {undefined} sy\n     * @param\n     * {number} depth\n     * @param\n     * {number} c\n     ",
                     "start": 322,
                     "end": 757,
                     "loc": {
@@ -6200,9 +6200,9 @@
                                 "line": 193,
                                 "column": 18
                               },
-                              "identifierName": "volumn"
+                              "identifierName": "volume"
                             },
-                            "name": "volumn"
+                            "name": "volume"
                           },
                           "init": {
                             "type": "NewExpression",
@@ -6655,9 +6655,9 @@
                                               "line": 195,
                                               "column": 18
                                             },
-                                            "identifierName": "volumn"
+                                            "identifierName": "volume"
                                           },
-                                          "name": "volumn"
+                                          "name": "volume"
                                         },
                                         "property": {
                                           "type": "Identifier",
@@ -6750,9 +6750,9 @@
                             "line": 197,
                             "column": 21
                           },
-                          "identifierName": "volumn"
+                          "identifierName": "volume"
                         },
-                        "name": "volumn"
+                        "name": "volume"
                       }
                     }
                   ],
@@ -6780,7 +6780,7 @@
                 "trailingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n     * @desc\n     * Add the weights of a given network `volumn` to current network\n     * @lineNumber\n     * 113\n     * @param\n     * {Vol} volumn\n     ",
+                    "value": "*\n     * @desc\n     * Add the weights of a given network `volume` to current network\n     * @lineNumber\n     * 113\n     * @param\n     * {Vol} volume\n     ",
                     "start": 4498,
                     "end": 4656,
                     "loc": {
@@ -6849,9 +6849,9 @@
                         "line": 207,
                         "column": 18
                       },
-                      "identifierName": "volumn"
+                      "identifierName": "volume"
                     },
-                    "name": "volumn"
+                    "name": "volume"
                   }
                 ],
                 "body": {
@@ -7199,9 +7199,9 @@
                                               "line": 209,
                                               "column": 35
                                             },
-                                            "identifierName": "volumn"
+                                            "identifierName": "volume"
                                           },
-                                          "name": "volumn"
+                                          "name": "volume"
                                         },
                                         "property": {
                                           "type": "Identifier",
@@ -7257,7 +7257,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n     * @desc\n     * Add the weights of a given network `volumn` to current network\n     * @lineNumber\n     * 113\n     * @param\n     * {Vol} volumn\n     ",
+                    "value": "*\n     * @desc\n     * Add the weights of a given network `volume` to current network\n     * @lineNumber\n     * 113\n     * @param\n     * {Vol} volume\n     ",
                     "start": 4498,
                     "end": 4656,
                     "loc": {
@@ -7275,7 +7275,7 @@
                 "trailingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n     * @desc\n     * Add the weights of a given network `volumn` with scale `alpha` to current network\n     * @lineNumber\n     * 121\n     * @param\n     * {Vol} volumn\n     * @param\n     * {number} alpha\n     ",
+                    "value": "*\n     * @desc\n     * Add the weights of a given network `volume` with scale `alpha` to current network\n     * @lineNumber\n     * 121\n     * @param\n     * {Vol} volume\n     * @param\n     * {number} alpha\n     ",
                     "start": 4789,
                     "end": 5002,
                     "loc": {
@@ -7344,9 +7344,9 @@
                         "line": 222,
                         "column": 24
                       },
-                      "identifierName": "volumn"
+                      "identifierName": "volume"
                     },
-                    "name": "volumn"
+                    "name": "volume"
                   },
                   {
                     "type": "Identifier",
@@ -7743,9 +7743,9 @@
                                                 "line": 224,
                                                 "column": 43
                                               },
-                                              "identifierName": "volumn"
+                                              "identifierName": "volume"
                                             },
-                                            "name": "volumn"
+                                            "name": "volume"
                                           },
                                           "property": {
                                             "type": "Identifier",
@@ -7802,7 +7802,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n     * @desc\n     * Add the weights of a given network `volumn` with scale `alpha` to current network\n     * @lineNumber\n     * 121\n     * @param\n     * {Vol} volumn\n     * @param\n     * {number} alpha\n     ",
+                    "value": "*\n     * @desc\n     * Add the weights of a given network `volume` with scale `alpha` to current network\n     * @lineNumber\n     * 121\n     * @param\n     * {Vol} volume\n     * @param\n     * {number} alpha\n     ",
                     "start": 4789,
                     "end": 5002,
                     "loc": {
@@ -9055,7 +9055,7 @@
           "leadingComments": [
             {
               "type": "CommentBlock",
-              "value": "*\n * @desc\n * Store a 3D volumn of numbers with width(sx), height(sy), depth(depth) for the network.\n * It also holds weights and gradients w.r.t the weights.\n * @lineNumber\n * 14\n ",
+              "value": "*\n * @desc\n * Store a 3D volume of numbers with width(sx), height(sy), depth(depth) for the network.\n * It also holds weights and gradients w.r.t the weights.\n * @lineNumber\n * 14\n ",
               "start": 34,
               "end": 219,
               "loc": {
@@ -9075,7 +9075,7 @@
         "leadingComments": [
           {
             "type": "CommentBlock",
-            "value": "*\n * @desc\n * Store a 3D volumn of numbers with width(sx), height(sy), depth(depth) for the network.\n * It also holds weights and gradients w.r.t the weights.\n * @lineNumber\n * 14\n ",
+            "value": "*\n * @desc\n * Store a 3D volume of numbers with width(sx), height(sy), depth(depth) for the network.\n * It also holds weights and gradients w.r.t the weights.\n * @lineNumber\n * 14\n ",
             "start": 34,
             "end": 219,
             "loc": {
@@ -9097,7 +9097,7 @@
   "comments": [
     {
       "type": "CommentBlock",
-      "value": "*\n * @desc\n * Store a 3D volumn of numbers with width(sx), height(sy), depth(depth) for the network.\n * It also holds weights and gradients w.r.t the weights.\n * @lineNumber\n * 14\n ",
+      "value": "*\n * @desc\n * Store a 3D volume of numbers with width(sx), height(sy), depth(depth) for the network.\n * It also holds weights and gradients w.r.t the weights.\n * @lineNumber\n * 14\n ",
       "start": 34,
       "end": 219,
       "loc": {
@@ -9113,7 +9113,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n     * @desc\n     * Initialize the network input placeholders and parameters\n     * - If the given `width` is an array, we assume that 1D volumn is provided\n     * - If the given `width`/`height`/`depth` are all `number`, it will be treated as a 3D vlumn\n     * @lineNumber\n     * 28\n     * @param\n     * {undefined} sx\n     * @param\n     * {undefined} sy\n     * @param\n     * {number} depth\n     * @param\n     * {number} c\n     ",
+      "value": "*\n     * @desc\n     * Initialize the network input placeholders and parameters\n     * - If the given `width` is an array, we assume that 1D volume is provided\n     * - If the given `width`/`height`/`depth` are all `number`, it will be treated as a 3D vlumn\n     * @lineNumber\n     * 28\n     * @param\n     * {undefined} sx\n     * @param\n     * {undefined} sy\n     * @param\n     * {number} depth\n     * @param\n     * {number} c\n     ",
       "start": 322,
       "end": 757,
       "loc": {
@@ -9273,7 +9273,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n     * @desc\n     * Add the weights of a given network `volumn` to current network\n     * @lineNumber\n     * 113\n     * @param\n     * {Vol} volumn\n     ",
+      "value": "*\n     * @desc\n     * Add the weights of a given network `volume` to current network\n     * @lineNumber\n     * 113\n     * @param\n     * {Vol} volume\n     ",
       "start": 4498,
       "end": 4656,
       "loc": {
@@ -9289,7 +9289,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n     * @desc\n     * Add the weights of a given network `volumn` with scale `alpha` to current network\n     * @lineNumber\n     * 121\n     * @param\n     * {Vol} volumn\n     * @param\n     * {number} alpha\n     ",
+      "value": "*\n     * @desc\n     * Add the weights of a given network `volume` with scale `alpha` to current network\n     * @lineNumber\n     * 121\n     * @param\n     * {Vol} volume\n     * @param\n     * {number} alpha\n     ",
       "start": 4789,
       "end": 5002,
       "loc": {
@@ -9541,7 +9541,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n * @desc\n * Store a 3D volumn of numbers with width(sx), height(sy), depth(depth) for the network.\n * It also holds weights and gradients w.r.t the weights.\n * @lineNumber\n * 14\n ",
+      "value": "*\n * @desc\n * Store a 3D volume of numbers with width(sx), height(sy), depth(depth) for the network.\n * It also holds weights and gradients w.r.t the weights.\n * @lineNumber\n * 14\n ",
       "start": 34,
       "end": 219,
       "loc": {
@@ -10310,7 +10310,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n     * @desc\n     * Initialize the network input placeholders and parameters\n     * - If the given `width` is an array, we assume that 1D volumn is provided\n     * - If the given `width`/`height`/`depth` are all `number`, it will be treated as a 3D vlumn\n     * @lineNumber\n     * 28\n     * @param\n     * {undefined} sx\n     * @param\n     * {undefined} sy\n     * @param\n     * {number} depth\n     * @param\n     * {number} c\n     ",
+      "value": "*\n     * @desc\n     * Initialize the network input placeholders and parameters\n     * - If the given `width` is an array, we assume that 1D volume is provided\n     * - If the given `width`/`height`/`depth` are all `number`, it will be treated as a 3D vlumn\n     * @lineNumber\n     * 28\n     * @param\n     * {undefined} sx\n     * @param\n     * {undefined} sy\n     * @param\n     * {number} depth\n     * @param\n     * {number} c\n     ",
       "start": 322,
       "end": 757,
       "loc": {
@@ -21471,7 +21471,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "volumn",
+      "value": "volume",
       "start": 4322,
       "end": 4328,
       "loc": {
@@ -22335,7 +22335,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "volumn",
+      "value": "volume",
       "start": 4429,
       "end": 4435,
       "loc": {
@@ -22674,7 +22674,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "volumn",
+      "value": "volume",
       "start": 4480,
       "end": 4486,
       "loc": {
@@ -22741,7 +22741,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n     * @desc\n     * Add the weights of a given network `volumn` to current network\n     * @lineNumber\n     * 113\n     * @param\n     * {Vol} volumn\n     ",
+      "value": "*\n     * @desc\n     * Add the weights of a given network `volume` to current network\n     * @lineNumber\n     * 113\n     * @param\n     * {Vol} volume\n     ",
       "start": 4498,
       "end": 4656,
       "loc": {
@@ -22818,7 +22818,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "volumn",
+      "value": "volume",
       "start": 4669,
       "end": 4675,
       "loc": {
@@ -23415,7 +23415,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "volumn",
+      "value": "volume",
       "start": 4750,
       "end": 4756,
       "loc": {
@@ -23688,7 +23688,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n     * @desc\n     * Add the weights of a given network `volumn` with scale `alpha` to current network\n     * @lineNumber\n     * 121\n     * @param\n     * {Vol} volumn\n     * @param\n     * {number} alpha\n     ",
+      "value": "*\n     * @desc\n     * Add the weights of a given network `volume` with scale `alpha` to current network\n     * @lineNumber\n     * 121\n     * @param\n     * {Vol} volume\n     * @param\n     * {number} alpha\n     ",
       "start": 4789,
       "end": 5002,
       "loc": {
@@ -23765,7 +23765,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "volumn",
+      "value": "volume",
       "start": 5021,
       "end": 5027,
       "loc": {
@@ -24467,7 +24467,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "volumn",
+      "value": "volume",
       "start": 5117,
       "end": 5123,
       "loc": {

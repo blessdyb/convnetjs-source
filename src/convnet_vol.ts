@@ -8,7 +8,7 @@ interface VolModel {
 }
 
 /**
- * Store a 3D volumn of numbers with width(sx), height(sy), depth(depth) for the network.
+ * Store a 3D volume of numbers with width(sx), height(sy), depth(depth) for the network.
  * It also holds weights and gradients w.r.t the weights.
  */
 export class Vol {
@@ -22,7 +22,7 @@ export class Vol {
     }
     /**
      * Initialize the network input placeholders and parameters
-     * - If the given `width` is an array, we assume that 1D volumn is provided
+     * - If the given `width` is an array, we assume that 1D volume is provided
      * - If the given `width`/`height`/`depth` are all `number`, it will be treated as a 3D vlumn
      */
     init(sx: any, sy: any, depth: number, c?: number) {
@@ -101,26 +101,26 @@ export class Vol {
      * Return a clone of current network with the same parameters, only reset gradients to 0
      */
     clone(): Vol {
-        let volumn = new Vol(this.sx, this.sy, this.depth, 0.0);
+        let volume = new Vol(this.sx, this.sy, this.depth, 0.0);
         this.w.forEach((item, index) => {
-            volumn.w[index] = item;
+            volume.w[index] = item;
         });
-        return volumn;
+        return volume;
     }
     /**
-     * Add the weights of a given network `volumn` to current network
+     * Add the weights of a given network `volume` to current network
      */
-    addFrom(volumn: Vol): void {
+    addFrom(volume: Vol): void {
         this.w.forEach((item, index) => {
-            this.w[index] += volumn.w[index];
+            this.w[index] += volume.w[index];
         });
     }
     /**
-     * Add the weights of a given network `volumn` with scale `alpha` to current network
+     * Add the weights of a given network `volume` with scale `alpha` to current network
      */
-    addFromScaled(volumn: Vol, alpha: number): void {
+    addFromScaled(volume: Vol, alpha: number): void {
         this.w.forEach((item, index) => {
-            this.w[index] += alpha * volumn.w[index];
+            this.w[index] += alpha * volume.w[index];
         });
     }
     /**

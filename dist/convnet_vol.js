@@ -56,22 +56,22 @@ var Vol = (function () {
         return new Vol(this.sx, this.sy, this.depth, 0.0);
     };
     Vol.prototype.clone = function () {
-        var volumn = new Vol(this.sx, this.sy, this.depth, 0.0);
+        var volume = new Vol(this.sx, this.sy, this.depth, 0.0);
         this.w.forEach(function (item, index) {
-            volumn.w[index] = item;
+            volume.w[index] = item;
         });
-        return volumn;
+        return volume;
     };
-    Vol.prototype.addFrom = function (volumn) {
+    Vol.prototype.addFrom = function (volume) {
         var _this = this;
         this.w.forEach(function (item, index) {
-            _this.w[index] += volumn.w[index];
+            _this.w[index] += volume.w[index];
         });
     };
-    Vol.prototype.addFromScaled = function (volumn, alpha) {
+    Vol.prototype.addFromScaled = function (volume, alpha) {
         var _this = this;
         this.w.forEach(function (item, index) {
-            _this.w[index] += alpha * volumn.w[index];
+            _this.w[index] += alpha * volume.w[index];
         });
     };
     Vol.prototype.setConst = function (value) {

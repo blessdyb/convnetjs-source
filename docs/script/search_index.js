@@ -30,6 +30,12 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
+    "convnet-sourcecode/src/convnet_vol_util.ts~augment",
+    "function/index.html#static-function-augment",
+    "<span>augment</span> <span class=\"search-result-import-path\">convnet-sourcecode/src/convnet_vol_util.ts</span>",
+    "function"
+  ],
+  [
     "convnet-sourcecode/src/utils.ts~gaussrandom",
     "function/index.html#static-function-gaussRandom",
     "<span>gaussRandom</span> <span class=\"search-result-import-path\">convnet-sourcecode/src/utils.ts</span>",
@@ -39,6 +45,12 @@ window.esdocSearchIndex = [
     "convnet-sourcecode/src/utils.ts~getopt",
     "function/index.html#static-function-getopt",
     "<span>getopt</span> <span class=\"search-result-import-path\">convnet-sourcecode/src/utils.ts</span>",
+    "function"
+  ],
+  [
+    "convnet-sourcecode/src/convnet_vol_util.ts~img_to_vol",
+    "function/index.html#static-function-img_to_vol",
+    "<span>img_to_vol</span> <span class=\"search-result-import-path\">convnet-sourcecode/src/convnet_vol_util.ts</span>",
     "function"
   ],
   [
@@ -496,6 +508,12 @@ window.esdocSearchIndex = [
     "class/src/convnet_vol.ts~Vol.html#instance-member-w",
     "src/convnet_vol.ts~Vol#w",
     "member"
+  ],
+  [
+    "src/convnet_vol_util.ts",
+    "file/src/convnet_vol_util.ts.html",
+    "src/convnet_vol_util.ts",
+    "file"
   ],
   [
     "src/index.ts",

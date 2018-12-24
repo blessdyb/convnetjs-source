@@ -1,7 +1,7 @@
 {
-  "coverage": "75.67%",
-  "expectCount": 37,
-  "actualCount": 28,
+  "coverage": "76.92%",
+  "expectCount": 39,
+  "actualCount": 30,
   "files": {
     "src/convnet_vol.ts": {
       "expectCount": 22,
@@ -15,11 +15,16 @@
         40
       ]
     },
+    "src/convnet_vol_util.ts": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
     "src/index.ts": {
       "expectCount": 1,
       "actualCount": 0,
       "undocumentLines": [
-        3
+        4
       ]
     },
     "src/utils.ts": {
